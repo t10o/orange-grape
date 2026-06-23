@@ -1,0 +1,67 @@
+---
+import type { SanityPost } from "@orange-grape/types";
+import { urlFor } from "../lib/image";
+
+interface Props {
+  post: SanityPost;
+}
+
+const { post } = Astro.props;
+const postUrl = `/blog/${post.slug.current}`;
+const formattedDate = new Date(post.publishedAt).toLocaleDateString("ja-JP", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const thumbnailUrl = post.mainImage
+  ? urlFor(post.mainImage).width(800).height(400).auto("format").url()
+  : null;
+---
+
+<article aria-labelledby={`post-title-${post._id}`} class="flex flex-col gap-3">
+  {thumbnailUrl && (
+    <a href={postUrl} tabindex="-1" aria-hidden="true">
+      <img
+        src={thumbnailUrl}
+        alt={post.mainImage?.alt ?? ""}
+        width="800"
+        height="400"
+        loading="lazy"
+        style="aspect-ratio: 2/1"
+        class="w-full rounded-lg object-cover"
+      />
+    </a>
+  )}
+
+  <div class="flex flex-col gap-2">
+    {post.categories && post.categories.length > 0 && (
+      <ul class="flex flex-wrap gap-2 list-none" aria-label="カテゴリ">
+        {post.categories.map((cat) => (
+          <li>
+            <a
+              href={`/category/${cat.slug.current}`}
+              class="text-xs font-medium text-brand-600 hover:text-brand-700"
+            >
+              {cat.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <h2 id={`post-title-${post._id}`} class="text-xl font-bold leading-snug">
+      <a href={postUrl} class="hover:text-brand-600">
+        {post.title}
+      </a>
+    </h2>
+
+    {post.excerpt && (
+      <p class="text-gray-600 dark:text-gray-400 line-clamp-3">{post.excerpt}</p>
+    )}
+
+    <div class="flex items-center gap-3 text-sm text-gray-500">
+      <time datetime={post.publishedAt}>{formattedDate}</time>
+      {post.author && <span>by {post.author.name}</span>}
+    </div>
+  </div>
+</article>

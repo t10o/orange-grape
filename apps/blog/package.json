@@ -1,0 +1,29 @@
+{
+  "name": "@orange-grape/blog",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "astro build",
+    "dev": "astro dev",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "clean": "rm -rf dist .astro"
+  },
+  "dependencies": {
+    "@orange-grape/types": "workspace:*",
+    "@sanity/client": "^7.23.0",
+    "@sanity/image-url": "^1.0.2",
+    "astro": "^6.4.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "@orange-grape/typescript": "workspace:*",
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/node": "catalog:",
+    "tailwindcss": "^4.3.1",
+    "typescript": "catalog:",
+    "vitest": "^3.0.0"
+  }
+}

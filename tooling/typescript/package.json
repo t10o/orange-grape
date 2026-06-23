@@ -1,0 +1,10 @@
+{
+  "name": "@orange-grape/typescript",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./base": "./tsconfig.base.json",
+    "./astro": "./tsconfig.astro.json",
+    "./nextjs": "./tsconfig.nextjs.json"
+  }
+}

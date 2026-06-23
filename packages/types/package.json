@@ -1,0 +1,12 @@
+{
+  "name": "@orange-grape/types",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "biome check .",
+    "clean": "rm -rf dist"
+  }
+}

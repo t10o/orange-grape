@@ -1,0 +1,25 @@
+{
+  "name": "orange-grape",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=11.0.0"
+  },
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "biome check --write .",
+    "test": "turbo test",
+    "test:e2e": "turbo test:e2e",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.0",
+    "turbo": "2.9.18",
+    "typescript": "catalog:",
+    "wrangler": "^4.0.0"
+  }
+}

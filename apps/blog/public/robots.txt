@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block draft content
+Disallow: /drafts/
+
+Sitemap: https://orange-grape.com/sitemap-index.xml
