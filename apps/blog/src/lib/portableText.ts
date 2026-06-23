@@ -1,4 +1,4 @@
-import type { SanityBlock, SanityMarkDef, SanitySpan } from "@orange-grape/types";
+import type { SanityBlock, SanityImage, SanityMarkDef, SanitySpan } from "@orange-grape/types";
 import { urlFor } from "./image";
 
 function escapeHtml(str: string): string {
@@ -72,7 +72,7 @@ function renderNormalBlock(block: SanityBlock): string {
 
 function renderImageBlock(block: SanityBlock): string {
   if (!block.asset) return "";
-  const src = urlFor(block as any)
+  const src = urlFor(block as unknown as SanityImage)
     .width(800)
     .auto("format")
     .url();

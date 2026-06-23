@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   // Turbopack is the default in Next.js 16
   logging: {
     fetches: {
