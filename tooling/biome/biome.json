@@ -17,7 +17,8 @@
       "!**/.next/**",
       "!**/.astro/**",
       "!**/.turbo/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/.sanity/**"
     ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },

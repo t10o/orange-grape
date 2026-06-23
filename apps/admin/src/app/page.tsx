@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 const STUDIO_URL = process.env.SANITY_STUDIO_URL ?? "http://localhost:3333";
 
 const cards = [
