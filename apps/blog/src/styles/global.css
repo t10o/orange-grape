@@ -45,7 +45,7 @@
   :root {
     --neuro-bg:    oklch(0.215 0.018 42);
     --neuro-text:  oklch(0.88  0.012 70);
-    --neuro-muted: oklch(0.55  0.015 55);
+    --neuro-muted: oklch(0.65  0.015 55);
     --neuro-light: oklch(0.30  0.020 46  / 0.60);
     --neuro-dark:  oklch(0.10  0.010 38  / 0.85);
   }
