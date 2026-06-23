@@ -30,6 +30,10 @@ jobs:
 
       - name: Test
         run: pnpm turbo test
+        env:
+          SANITY_PROJECT_ID: 1hn0x86a
+          SANITY_DATASET: production
+          SITE_URL: https://orange-grape.com
 
   deploy:
     name: Deploy
