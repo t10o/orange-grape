@@ -4,6 +4,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "env": ["SANITY_PROJECT_ID", "SANITY_DATASET", "SITE_URL"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**", ".astro/**"]
     },
     "dev": {
