@@ -1,5 +1,5 @@
-import { defineType, defineArrayMember, defineField } from "sanity";
 import { ImageIcon } from "@sanity/icons";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const blockContentType = defineType({
   name: "blockContent",
@@ -38,9 +38,7 @@ export const blockContentType = defineType({
                 title: "URL",
                 type: "url",
                 validation: (r) =>
-                  r
-                    .required()
-                    .uri({ allowRelative: true, scheme: ["http", "https", "mailto"] }),
+                  r.required().uri({ allowRelative: true, scheme: ["http", "https", "mailto"] }),
               }),
             ],
           }),

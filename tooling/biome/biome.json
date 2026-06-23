@@ -1,4 +1,5 @@
 {
+  "root": false,
   "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
   "vcs": {
     "enabled": true,
@@ -7,22 +8,23 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/.next/**",
-      "**/.astro/**",
-      "**/.turbo/**",
-      "**/coverage/**"
+    "includes": [
+      "**",
+      "!**/*.css",
+      "!**/*.astro",
+      "!**/node_modules/**",
+      "!**/dist/**",
+      "!**/.next/**",
+      "!**/.astro/**",
+      "!**/.turbo/**",
+      "!**/coverage/**"
     ]
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "correctness": {
         "noUnusedImports": "error",
         "noUnusedVariables": "error"

@@ -1,10 +1,10 @@
 ---
 import type { GetStaticPaths } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getAllSlugs, getPostBySlug } from "../../lib/queries";
 import { urlFor } from "../../lib/image";
 import { articleSchema, breadcrumbSchema } from "../../lib/jsonld";
 import { renderPortableText } from "../../lib/portableText";
+import { getAllSlugs, getPostBySlug } from "../../lib/queries";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await getAllSlugs();

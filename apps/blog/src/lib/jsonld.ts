@@ -54,9 +54,7 @@ export function articleSchema(post: {
   };
 }
 
-export function breadcrumbSchema(
-  items: Array<{ name: string; url: string }>,
-) {
+export function breadcrumbSchema(items: Array<{ name: string; url: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

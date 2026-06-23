@@ -1,5 +1,5 @@
-import { defineType, defineField, defineArrayMember } from "sanity";
 import { DocumentTextIcon } from "@sanity/icons";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const postType = defineType({
   name: "post",
@@ -33,8 +33,7 @@ export const postType = defineType({
       description: "記事一覧・OGP に使用（200文字以内推奨）",
       type: "text",
       rows: 3,
-      validation: (r) =>
-        r.required().max(200).warning("200文字以内を推奨します"),
+      validation: (r) => r.required().max(200).warning("200文字以内を推奨します"),
     }),
     defineField({
       name: "mainImage",
@@ -47,8 +46,7 @@ export const postType = defineType({
           title: "代替テキスト",
           description: "アクセシビリティ対応のため必須",
           type: "string",
-          validation: (r) =>
-            r.required().warning("アクセシビリティのため必須です"),
+          validation: (r) => r.required().warning("アクセシビリティのため必須です"),
         }),
       ],
     }),
@@ -79,9 +77,7 @@ export const postType = defineType({
       publishedAt: "publishedAt",
     },
     prepare({ title, author, media, publishedAt }) {
-      const date = publishedAt
-        ? new Date(publishedAt).toLocaleDateString("ja-JP")
-        : "未公開";
+      const date = publishedAt ? new Date(publishedAt).toLocaleDateString("ja-JP") : "未公開";
       return {
         title,
         subtitle: `${author ? `by ${author}` : "著者未設定"} · ${date}`,

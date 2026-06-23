@@ -23,11 +23,21 @@ function renderSpan(span: SanitySpan, markDefs: SanityMarkDef[]): string {
       }
     } else {
       switch (mark) {
-        case "strong": text = `<strong>${text}</strong>`; break;
-        case "em": text = `<em>${text}</em>`; break;
-        case "code": text = `<code>${text}</code>`; break;
-        case "underline": text = `<u>${text}</u>`; break;
-        case "strike-through": text = `<s>${text}</s>`; break;
+        case "strong":
+          text = `<strong>${text}</strong>`;
+          break;
+        case "em":
+          text = `<em>${text}</em>`;
+          break;
+        case "code":
+          text = `<code>${text}</code>`;
+          break;
+        case "underline":
+          text = `<u>${text}</u>`;
+          break;
+        case "strike-through":
+          text = `<s>${text}</s>`;
+          break;
       }
     }
   }
@@ -41,20 +51,31 @@ function renderNormalBlock(block: SanityBlock): string {
   const style = block.style ?? "normal";
 
   switch (style) {
-    case "h1": return `<h1>${content}</h1>`;
-    case "h2": return `<h2>${content}</h2>`;
-    case "h3": return `<h3>${content}</h3>`;
-    case "h4": return `<h4>${content}</h4>`;
-    case "h5": return `<h5>${content}</h5>`;
-    case "h6": return `<h6>${content}</h6>`;
-    case "blockquote": return `<blockquote><p>${content}</p></blockquote>`;
-    default: return content ? `<p>${content}</p>` : "";
+    case "h1":
+      return `<h1>${content}</h1>`;
+    case "h2":
+      return `<h2>${content}</h2>`;
+    case "h3":
+      return `<h3>${content}</h3>`;
+    case "h4":
+      return `<h4>${content}</h4>`;
+    case "h5":
+      return `<h5>${content}</h5>`;
+    case "h6":
+      return `<h6>${content}</h6>`;
+    case "blockquote":
+      return `<blockquote><p>${content}</p></blockquote>`;
+    default:
+      return content ? `<p>${content}</p>` : "";
   }
 }
 
 function renderImageBlock(block: SanityBlock): string {
   if (!block.asset) return "";
-  const src = urlFor(block as any).width(800).auto("format").url();
+  const src = urlFor(block as any)
+    .width(800)
+    .auto("format")
+    .url();
   const alt = escapeHtml((block.alt as string) ?? "");
   const asset = block.asset as { metadata?: { dimensions?: { width: number; height: number } } };
   const w = asset.metadata?.dimensions?.width ?? 800;

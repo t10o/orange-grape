@@ -1,5 +1,5 @@
-import { client } from "./sanity";
 import type { SanityPost } from "@orange-grape/types";
+import { client } from "./sanity";
 
 const POST_FIELDS = `
   _id,
