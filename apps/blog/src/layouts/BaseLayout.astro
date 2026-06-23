@@ -41,7 +41,7 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : null;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:site_name" content="orange-grape" />
+    <meta property="og:site_name" content="Orage Grape" />
     <meta property="og:locale" content="ja_JP" />
     {article && (
       <>
@@ -85,36 +85,68 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : null;
       />
     )}
   </head>
-  <body class="min-h-screen font-sans bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
-    <!-- Skip navigation for keyboard/screen reader users -->
+  <body class="min-h-screen font-sans antialiased">
+    <!-- Skip navigation -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-500 focus:text-white focus:rounded-md"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-500 focus:text-white focus:rounded-2xl"
     >
       コンテンツへスキップ
     </a>
 
-    <header role="banner">
+    <!-- Header -->
+    <header role="banner" class="sticky top-0 z-40">
       <slot name="header">
-        <nav aria-label="サイトナビゲーション" class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" aria-label="orange-grape ホームへ" class="text-xl font-bold text-brand-600">
-            orange-grape
+        <nav
+          aria-label="サイトナビゲーション"
+          class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-6"
+          style="background: var(--neuro-bg); box-shadow: 0 4px 12px var(--neuro-dark), 0 -1px 4px var(--neuro-light);"
+        >
+          <!-- Logo -->
+          <a
+            href="/"
+            aria-label="Orage Grape ホームへ"
+            class="shrink-0"
+          >
+            <span class="text-xl font-extrabold tracking-tight gradient-text-primary select-none">
+              Orage Grape
+            </span>
           </a>
-          <ul class="flex gap-6 list-none" role="list">
-            <li><a href="/" class="hover:text-brand-600">ホーム</a></li>
+
+          <!-- Nav links -->
+          <ul class="flex items-center gap-3 list-none" role="list">
+            <li>
+              <a
+                href="/"
+                class="px-4 py-1.5 rounded-2xl text-sm font-medium neuro-muted hover:neuro-text neuro-raised-sm transition-all duration-200 active:neuro-pressed-sm"
+              >
+                ホーム
+              </a>
+            </li>
           </ul>
         </nav>
       </slot>
     </header>
 
+    <!-- Main -->
     <main id="main-content" tabindex="-1">
       <slot />
     </main>
 
-    <footer role="contentinfo" class="max-w-4xl mx-auto px-4 py-8 mt-16 border-t border-gray-200 dark:border-gray-800">
-      <p class="text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} orange-grape. All rights reserved.
-      </p>
+    <!-- Footer -->
+    <footer role="contentinfo" class="mt-24">
+      <div
+        class="max-w-5xl mx-auto mx-6 px-6 py-10 rounded-t-3xl neuro-pressed"
+      >
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <a href="/" class="text-lg font-bold gradient-text-primary">
+            Orage Grape
+          </a>
+          <p class="text-sm neuro-muted">
+            &copy; {new Date().getFullYear()} Orage Grape. All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

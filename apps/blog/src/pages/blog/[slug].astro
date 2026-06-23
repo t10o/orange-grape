@@ -59,98 +59,142 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString("ja-JP", {
   }}
   jsonLd={jsonLd}
 >
-  <article
-    aria-labelledby="post-title"
-    class="max-w-3xl mx-auto px-4 py-12"
-    itemscope
-    itemtype="https://schema.org/Article"
-  >
-    <!-- Hero image -->
-    {post.mainImage && ogImage && (
-      <figure class="mb-8 -mx-4 sm:mx-0">
-        <img
-          src={ogImage}
-          alt={post.mainImage.alt ?? ""}
-          width="1200"
-          height="630"
-          loading="eager"
-          fetchpriority="high"
-          style="aspect-ratio: 1200/630"
-          class="w-full rounded-lg object-cover"
-        />
-      </figure>
-    )}
+  <div class="max-w-3xl mx-auto px-6">
+    <!-- Breadcrumb -->
+    <nav aria-label="パンくず" class="pt-8 pb-2">
+      <ol
+        class="flex flex-wrap items-center gap-1.5 text-xs list-none"
+        itemscope
+        itemtype="https://schema.org/BreadcrumbList"
+      >
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="/" class="neuro-muted hover:text-primary-500 transition-colors">
+            <span itemprop="name">ホーム</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <li aria-hidden="true" class="neuro-muted">/</li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="/blog" class="neuro-muted hover:text-primary-500 transition-colors">
+            <span itemprop="name">ブログ</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li aria-hidden="true" class="neuro-muted">/</li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span itemprop="name" class="neuro-text line-clamp-1">{post.title}</span>
+          <meta itemprop="position" content="3" />
+        </li>
+      </ol>
+    </nav>
 
-    <!-- Header -->
-    <header class="mb-8">
-      {post.categories && post.categories.length > 0 && (
-        <ul class="flex flex-wrap gap-2 list-none mb-3" aria-label="カテゴリ">
-          {post.categories.map((cat) => (
-            <li>
-              <a
-                href={`/category/${cat.slug.current}`}
-                class="text-sm font-medium text-brand-600 hover:text-brand-700"
-              >
-                {cat.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+    <article
+      aria-labelledby="post-title"
+      itemscope
+      itemtype="https://schema.org/Article"
+    >
+      <!-- Header -->
+      <header class="pt-8 pb-10">
+        {post.categories && post.categories.length > 0 && (
+          <ul class="flex flex-wrap gap-2 list-none mb-5" aria-label="カテゴリ">
+            {post.categories.map((cat, i) => (
+              <li>
+                <a
+                  href={`/category/${cat.slug.current}`}
+                  class={[
+                    "inline-flex items-center px-3 py-1 rounded-full text-xs font-bold neuro-raised-sm transition-all duration-200 active:neuro-pressed-sm",
+                    i % 2 === 0
+                      ? "text-primary-600"
+                      : "text-secondary-600",
+                  ].join(" ")}
+                >
+                  {cat.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <h1
+          id="post-title"
+          class="text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight neuro-text mb-5"
+        >
+          {post.title}
+        </h1>
+
+        <div class="flex items-center gap-3 text-sm neuro-muted">
+          <time datetime={post.publishedAt} itemprop="datePublished">{formattedDate}</time>
+          {post.author && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                <span itemprop="name">{post.author.name}</span>
+              </span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <!-- Hero image — pressed into the page surface -->
+      {post.mainImage && ogImage && (
+        <figure class="mb-10 rounded-3xl overflow-hidden neuro-pressed">
+          <img
+            src={ogImage}
+            alt={post.mainImage.alt ?? ""}
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            style="aspect-ratio: 1200/630"
+            class="w-full object-cover"
+          />
+        </figure>
       )}
 
-      <h1 id="post-title" class="text-3xl sm:text-4xl font-bold leading-tight mb-4">
-        {post.title}
-      </h1>
+      <!-- AdSense: 記事上 -->
+      <div
+        class="ad-slot my-10 rounded-3xl neuro-pressed flex items-center justify-center"
+        aria-label="広告"
+      />
 
-      <div class="flex items-center gap-4 text-sm text-gray-500">
-        <time datetime={post.publishedAt} itemprop="datePublished">
-          {formattedDate}
-        </time>
-        {post.author && (
-          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <span itemprop="name">by {post.author.name}</span>
-          </span>
-        )}
+      <!-- Article body -->
+      <div
+        class="rounded-3xl neuro-raised p-8 sm:p-10
+          prose prose-base max-w-none
+          prose-headings:neuro-text prose-headings:font-bold prose-headings:tracking-tight
+          prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+          prose-p:leading-relaxed prose-p:neuro-text
+          prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
+          prose-strong:neuro-text
+          prose-code:text-secondary-700 prose-code:bg-secondary-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-lg prose-code:text-sm prose-code:font-medium
+          prose-pre:rounded-2xl
+          prose-img:rounded-2xl
+          prose-blockquote:border-l-primary-400 prose-blockquote:neuro-muted prose-blockquote:not-italic
+          dark:prose-invert
+          dark:prose-a:text-primary-400
+          dark:prose-code:text-secondary-300 dark:prose-code:bg-secondary-950"
+        set:html={renderPortableText(post.body)}
+      />
+
+      <!-- AdSense: 記事下 -->
+      <div
+        class="ad-slot mt-10 rounded-3xl neuro-pressed flex items-center justify-center"
+        aria-label="広告"
+      />
+
+      <!-- Back link -->
+      <div class="mt-12 pb-16">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-medium neuro-raised-sm neuro-muted hover:text-primary-600 transition-all duration-200 active:neuro-pressed-sm"
+        >
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          記事一覧へ戻る
+        </a>
       </div>
-    </header>
-
-    <!-- AdSense: 記事上 -->
-    <div class="ad-slot my-8" aria-label="広告">
-      <!-- AdSense slot will be added here after approval -->
-    </div>
-
-    <!-- Article body -->
-    <div class="prose prose-gray dark:prose-invert max-w-none" set:html={renderPortableText(post.body)} />
-
-    <!-- AdSense: 記事下 -->
-    <div class="ad-slot mt-8" aria-label="広告">
-      <!-- AdSense slot will be added here after approval -->
-    </div>
-
-    <!-- Footer -->
-    <footer class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-800">
-      <nav aria-label="パンくず" class="text-sm text-gray-500">
-        <ol class="flex flex-wrap gap-1 list-none" itemscope itemtype="https://schema.org/BreadcrumbList">
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a itemprop="item" href="/" class="hover:text-brand-600">
-              <span itemprop="name">ホーム</span>
-            </a>
-            <meta itemprop="position" content="1" />
-          </li>
-          <li aria-hidden="true">/</li>
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a itemprop="item" href="/blog" class="hover:text-brand-600">
-              <span itemprop="name">ブログ</span>
-            </a>
-            <meta itemprop="position" content="2" />
-          </li>
-          <li aria-hidden="true">/</li>
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <span itemprop="name">{post.title}</span>
-            <meta itemprop="position" content="3" />
-          </li>
-        </ol>
-      </nav>
-    </footer>
-  </article>
+    </article>
+  </div>
 </BaseLayout>

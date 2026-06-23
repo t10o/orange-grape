@@ -1,37 +1,131 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
 
-  --color-brand-50: oklch(0.97 0.01 264);
-  --color-brand-100: oklch(0.93 0.04 264);
-  --color-brand-200: oklch(0.87 0.08 264);
-  --color-brand-300: oklch(0.78 0.13 264);
-  --color-brand-400: oklch(0.68 0.19 264);
-  --color-brand-500: oklch(0.58 0.24 264);
-  --color-brand-600: oklch(0.50 0.22 264);
-  --color-brand-700: oklch(0.42 0.18 264);
-  --color-brand-800: oklch(0.34 0.14 264);
-  --color-brand-900: oklch(0.28 0.12 264);
-  --color-brand-950: oklch(0.18 0.08 264);
+  /* Orange — primary */
+  --color-primary-50:  oklch(0.98 0.015 55);
+  --color-primary-100: oklch(0.95 0.040 55);
+  --color-primary-200: oklch(0.90 0.080 52);
+  --color-primary-300: oklch(0.82 0.140 50);
+  --color-primary-400: oklch(0.73 0.190 48);
+  --color-primary-500: oklch(0.66 0.220 46);
+  --color-primary-600: oklch(0.57 0.200 44);
+  --color-primary-700: oklch(0.47 0.170 42);
+  --color-primary-800: oklch(0.38 0.130 40);
+  --color-primary-900: oklch(0.30 0.100 40);
+  --color-primary-950: oklch(0.20 0.070 38);
+
+  /* Purple — secondary */
+  --color-secondary-50:  oklch(0.97 0.020 300);
+  --color-secondary-100: oklch(0.94 0.050 299);
+  --color-secondary-200: oklch(0.88 0.100 297);
+  --color-secondary-300: oklch(0.79 0.150 295);
+  --color-secondary-400: oklch(0.69 0.200 293);
+  --color-secondary-500: oklch(0.59 0.240 292);
+  --color-secondary-600: oklch(0.51 0.210 291);
+  --color-secondary-700: oklch(0.43 0.180 290);
+  --color-secondary-800: oklch(0.35 0.140 289);
+  --color-secondary-900: oklch(0.28 0.110 288);
+  --color-secondary-950: oklch(0.18 0.070 286);
+}
+
+/* ─── Neumorphism variables ─────────────────────────────────── */
+:root {
+  --neuro-bg:    oklch(0.925 0.018 62);
+  --neuro-text:  oklch(0.30  0.030 46);
+  --neuro-muted: oklch(0.55  0.020 52);
+  --neuro-light: oklch(1.00  0.005 80  / 0.80);
+  --neuro-dark:  oklch(0.76  0.040 52  / 0.32);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neuro-bg:    oklch(0.215 0.018 42);
+    --neuro-text:  oklch(0.88  0.012 70);
+    --neuro-muted: oklch(0.55  0.015 55);
+    --neuro-light: oklch(0.30  0.020 46  / 0.60);
+    --neuro-dark:  oklch(0.10  0.010 38  / 0.85);
+  }
 }
 
 @layer base {
-  /* Focus ring: always visible for keyboard users */
-  :focus-visible {
-    outline: 3px solid var(--color-brand-500);
-    outline-offset: 2px;
+  body {
+    background-color: var(--neuro-bg);
+    color: var(--neuro-text);
   }
 
-  /* Ensure images don't cause layout shift */
+  :focus-visible {
+    outline: 2.5px solid var(--color-primary-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
   img {
     max-width: 100%;
     height: auto;
   }
 
-  /* Reserve space for ads to prevent CLS */
   .ad-slot {
     min-height: 250px;
+  }
+}
+
+@layer utilities {
+  /* Raised — element pops out of the surface */
+  .neuro-raised {
+    background-color: var(--neuro-bg);
+    box-shadow:
+      -8px -8px 16px var(--neuro-light),
+       8px  8px 16px var(--neuro-dark);
+  }
+
+  .neuro-raised-sm {
+    background-color: var(--neuro-bg);
+    box-shadow:
+      -4px -4px 8px var(--neuro-light),
+       4px  4px 8px var(--neuro-dark);
+  }
+
+  .neuro-raised-lg {
+    background-color: var(--neuro-bg);
+    box-shadow:
+      -12px -12px 24px var(--neuro-light),
+       12px  12px 24px var(--neuro-dark);
+  }
+
+  /* Pressed — element is pushed into the surface */
+  .neuro-pressed {
+    box-shadow:
+      inset -5px -5px 10px var(--neuro-light),
+      inset  5px  5px 10px var(--neuro-dark);
+  }
+
+  .neuro-pressed-sm {
+    box-shadow:
+      inset -3px -3px 6px var(--neuro-light),
+      inset  3px  3px 6px var(--neuro-dark);
+  }
+
+  /* Gradient text */
+  .gradient-text-primary {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-500),
+      var(--color-secondary-500)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .neuro-text {
+    color: var(--neuro-text);
+  }
+
+  .neuro-muted {
+    color: var(--neuro-muted);
   }
 }
