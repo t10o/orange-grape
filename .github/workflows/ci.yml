@@ -31,9 +31,9 @@ jobs:
       - name: Test
         run: pnpm turbo test
         env:
-          SANITY_PROJECT_ID: 1hn0x86a
-          SANITY_DATASET: production
-          SITE_URL: https://orange-grape.com
+          SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+          SANITY_DATASET: ${{ vars.SANITY_DATASET }}
+          SITE_URL: ${{ vars.SITE_URL }}
 
   deploy:
     name: Deploy
@@ -58,9 +58,10 @@ jobs:
       - name: Build blog
         run: pnpm turbo build --filter=@orange-grape/blog
         env:
-          SANITY_PROJECT_ID: 1hn0x86a
-          SANITY_DATASET: production
-          SITE_URL: https://orange-grape.com
+          SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+          SANITY_DATASET: ${{ vars.SANITY_DATASET }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
