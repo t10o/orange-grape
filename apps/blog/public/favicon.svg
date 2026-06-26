@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea7e3c"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="32" height="32" rx="7" fill="url(#grad)"/>
+  <!-- Stem with leaf curl -->
+  <path d="M16 6 Q18.5 3 21.5 4.5" stroke="rgba(255,255,255,0.88)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- Grape cluster: triangle formation (top 1, bottom 2) -->
+  <circle cx="16" cy="12.5" r="5.5" fill="rgba(255,255,255,0.95)"/>
+  <circle cx="10.5" cy="21" r="5" fill="rgba(255,255,255,0.95)"/>
+  <circle cx="21.5" cy="21" r="5" fill="rgba(255,255,255,0.95)"/>
+  <!-- Subtle highlights -->
+  <circle cx="13.5" cy="9.5" r="1.8" fill="white" opacity="0.45"/>
+  <circle cx="8.2" cy="18.2" r="1.5" fill="white" opacity="0.45"/>
+  <circle cx="19.2" cy="18.2" r="1.5" fill="white" opacity="0.45"/>
+</svg>
