@@ -17,7 +17,9 @@ const CLIENT_SECRET = process.env.GOOGLE_ADSENSE_CLIENT_SECRET;
 const REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob";
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
-  console.error("Error: GOOGLE_ADSENSE_CLIENT_ID と GOOGLE_ADSENSE_CLIENT_SECRET を .env に設定してください");
+  console.error(
+    "Error: GOOGLE_ADSENSE_CLIENT_ID と GOOGLE_ADSENSE_CLIENT_SECRET を .env に設定してください",
+  );
   process.exit(1);
 }
 
