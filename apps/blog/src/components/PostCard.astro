@@ -4,9 +4,10 @@ import { urlFor } from "../lib/image";
 
 interface Props {
   post: SanityPost;
+  eager?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, eager = false } = Astro.props;
 const postUrl = `/blog/${post.slug.current}`;
 const formattedDate = new Date(post.publishedAt).toLocaleDateString("ja-JP", {
   year: "numeric",
@@ -15,6 +16,11 @@ const formattedDate = new Date(post.publishedAt).toLocaleDateString("ja-JP", {
 });
 const thumbnailUrl = post.mainImage
   ? urlFor(post.mainImage).width(800).height(420).auto("format").url()
+  : null;
+const thumbnailSrcset = post.mainImage
+  ? [400, 745, 800]
+      .map((w) => `${urlFor(post.mainImage!).width(w).height(Math.round(w * 420 / 800)).auto("format").url()} ${w}w`)
+      .join(", ")
   : null;
 ---
 
@@ -32,10 +38,13 @@ const thumbnailUrl = post.mainImage
     >
       <img
         src={thumbnailUrl}
+        srcset={thumbnailSrcset ?? undefined}
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         alt={post.mainImage?.alt ?? ""}
         width="800"
         height="420"
-        loading="lazy"
+        loading={eager ? "eager" : "lazy"}
+        fetchpriority={eager ? "high" : undefined}
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
     </a>
