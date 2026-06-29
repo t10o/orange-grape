@@ -13,16 +13,16 @@ const cards = [
   {
     title: "アナリティクス",
     description: "Google Analytics 4",
-    href: null,
+    href: "/analytics",
     external: false,
-    ready: false,
+    ready: true,
   },
   {
     title: "AdSense 収益",
     description: "広告収益レポート",
-    href: null,
+    href: "/adsense",
     external: false,
-    ready: false,
+    ready: true,
   },
 ];
 
